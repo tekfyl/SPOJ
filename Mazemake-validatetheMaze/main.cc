@@ -12,11 +12,12 @@ using namespace std;
 
 int in;
 vector<pair <int,int> > way;
+vector< vi > v; 
 
 int bfs(vector< vector<char> > maze, vector< pair <int,int> > bound){
       vector< pair <int,int> > q;
       q.pb(bound.front());
-
+    
       while(!q.empty()){
           int j,k; j = q.front().first; k = q.front().second; //cout << j << k << " ";
           if(q.front() == bound.back()) return 1;
@@ -25,10 +26,10 @@ int bfs(vector< vector<char> > maze, vector< pair <int,int> > bound){
           auto p2 = make_pair(j,k+1);
           auto p3 = make_pair(j-1,k);
           auto p4 = make_pair(j+1,k);
-          if(find(all(way), p1) != way.end()) q.pb(p1);
-          if(find(all(way), p2) != way.end()) q.pb(p2);
-          if(find(all(way), p3) != way.end()) q.pb(p3);
-          if(find(all(way), p4) != way.end()) q.pb(p4);
+          if( k-1>=0 && maze[j][k-1] == '.') q.pb(p1);
+          if(k+1<maze[j].size() && maze[j][k+1] == '.') q.pb(p2);
+          if(j-1>=0 && maze[j-1][k] == '.')  q.pb(p3);
+          if(j+1<maze.size() && maze[j+1][k] == '.') q.pb(p4);
       }
     return 0;
 }
@@ -38,7 +39,7 @@ int main(){
         int n,t;
         cin >> t;
         rep(i,t){
-            int m,n,valid=0; cin >> m >> n;
+            int m,n,valid=0; cin >> m >> n; vector< vi > vm(m, vi (n,-1)); v = vm;
             vector< vector<char> > maze(m, vector<char> (n));
             vector<pair <int,int> > bound;
             rep(j,m){
