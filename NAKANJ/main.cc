@@ -33,6 +33,7 @@ int knight(){
     int dy[] = {2, -2, -2, 2, 1, -1, -1, 1};
     vector<pair<int, int> > q; int ans=0;
     map<pair<int, int>, int > vis, dis;
+    dis[mk(x1, y11)] = 0;
     q.push_back(make_pair(x1, y11));
     while(!q.empty()){
         int x = q.front().first; 
@@ -62,6 +63,8 @@ int main(){
     while(t--){
         string s,r;
         cin >> s >> r;
+        if(s==r) cout << 0 << endl;
+        else{
         s[0] = s[0]-'a'+1;
         s[1] = s[1]-'0';
         r[0] = r[0]-'a'+1;
@@ -72,6 +75,7 @@ int main(){
         y2 = r[1];
         //cin  >> x1 >> y11 >> x2 >> y2;
         cout << knight() << endl;
+        }
     }
     //cout<<"\n"<<"Execution time : "<<tick()<<"\n";
     return 0;
